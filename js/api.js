@@ -1,4 +1,5 @@
 ﻿import express from 'express';
+import session from 'express-session';
 import fs from 'fs';
 import Database from './database.js';
 import check_connection from './apiTasks/task_checkDatabase.js';
@@ -16,16 +17,36 @@ const db = new Database(credentials);
 
 // API-Endpoint zum Überprüfen der Datenbankverbindung
 app.get('/api/check-database', async (req, res) => {
-    check_connection(db, req, res);
+    await check_connection(db, req, res);
 });
 
 app.get('/api/get-customer', async (req, res) => {
-    get_customer(db, req, res);
+    await get_customer(db, req, res);
 });
 
 app.get('/api/get-articles', async (req, res) => {
-    get_articles(db, req, res);
+    await get_articles(db, req, res);
 })
+
+app.get('/api/get-employee', async (req, res) => {
+    await get_employee(db, req, res);
+});
+
+// Funktion zum Abrufen eines bestimmten Mitarbeiters
+async function get_employee(db, req, res) {
+    const employeeId = req.query.id;
+    try {
+        const result = await db.query('SELECT * FROM employees WHERE id = $1', [employeeId]);
+        if (result.rows.length > 0) {
+            res.status(200).send(result.rows[0]);
+        } else {
+            res.status(404).send({ error: "Mitarbeiter nicht gefunden" });
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen des Mitarbeiters:", error);
+        res.status(500).send({ error: "Fehler beim Abrufen des Mitarbeiters" });
+    }
+};
 
 //TODO create endpoint for getting "username" and "password" for login process
 /*app.get('/api/get-loginData', async (req, res) => {

@@ -8,15 +8,21 @@
     display: inline-block;
     width: 130px;
 }
+#login>.input>label {
+    width: auto;
+}
 #register>div>.labelBig {
     display: inline-block;
     width: 80px;
 }
+#register>.buttons {
+    text-align: center
+}
 #login>div>input[type=text], #login>div>input[type=password] {
     width: 230px;
 }
-#register>.buttons {
-    text-align: center
+#login>.buttons {
+    display: none;
 }
 #patientLogin>div>label {
     display: inline-block;
