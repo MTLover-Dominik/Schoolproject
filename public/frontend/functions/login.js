@@ -1,13 +1,15 @@
-﻿import get_employee from "../apiFunctions/get_employee.js";
+﻿import * as get from "../api/get.js";
 
 let usertype = document.getElementById("usertype");
 let registerButton = document.getElementById('register');
 let loginButton = document.getElementById('loginButton');
+let currentUserType;
+let employeeData;
 
 usertype.addEventListener('change', event => {
-    let currentUsertype = usertype.value;
+    currentUserType = usertype.value;
     let loginButtons = document.getElementsByClassName('buttons');
-    switch (currentUsertype) {
+    switch (currentUserType) {
         case "patient":
             document.getElementById("patientLogin").style.display = "block";
             document.getElementById("patientname").required = true;
@@ -31,7 +33,7 @@ usertype.addEventListener('change', event => {
 
 loginButton.addEventListener('click', (e) => {
     e.preventDefault();
-    handleLogin(usertype.value);
+    handleLogin(currentUserType);
 });
 
 registerButton.addEventListener('click', (e) => {
@@ -40,12 +42,12 @@ registerButton.addEventListener('click', (e) => {
 
 async function handleLogin(usertype) {
     const form = document.getElementById("login");
-
     // Überprüfe, ob das Formular die HTML-Validierungsanforderungen erfüllt
     if (form.checkValidity()) {
-        if (usertype.value === "arzt" || usertype.value === "arzthelfer" || usertype.value === "verwaltung") {
+        if (usertype === "arzt" || usertype === "arzthelfer" || usertype === "verwaltung") {
             let employeeID = document.getElementById("employeenr").value;
-            get_employee(employeeID);
+            employeeData = await get.employee(employeeID);
+            window.location.href = '/testing'; //TODO change to dashboard
         }
         // Hier kannst du das machen, was du möchtest, z.B. Daten verarbeiten oder an eine API senden
         //TODO add check for "username" and "password"
