@@ -39,6 +39,19 @@ export async function allCustomers(listElement) {
     }
 }
 
+export async function doctor(employeeID) {
+    try {
+        const response = await fetch(`/api/doctor/${employeeID}`);
+        if (response.ok) {
+            return await response.json();
+        } else {
+            console.error("Arzt nicht gefunden oder Fehler:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen des Arztes:", error);
+    }
+}
+
 export async function employee(employeeID) {
     try {
         const response = await fetch(`/api/employee/${employeeID}`);

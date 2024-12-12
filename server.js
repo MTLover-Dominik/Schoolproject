@@ -34,8 +34,12 @@ app.get('/', (req, res) => {
 });
 
 //html routes
-app.get('/testing' , (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'frontend', 'views', 'test_showDatabaseStuff.html'));
+app.get('/dashboard' , (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'frontend', 'views', 'dashboard.html'));
+});
+
+app.get('/dashboard', async (req, res) => {
+    //res.sendFile(path.join(__dirname, 'public', 'frontend', 'views', 'dashboard.html'));
 })
 
 app.get('/api/customer', async (req, res) => {
@@ -46,17 +50,26 @@ app.get('/api/get-articles', async (req, res) => {
     await get.articles(db, req, res);
 })
 
+app.get('/api/doctor/:id', async (req, res) => {
+    await get.doctor(db, req, res);
+});
+
 app.get('/api/employee/:id', async (req, res) => {
     await get.employee(db, req, res);
 });
 
-app.get('/api/dashboard', async (req, res) => {
+
+
+app.get('/api/dashboard/session-data', async (req, res) => {
     const employeeData = req.session.employeeData;
     console.log(employeeData);
     res.status(200).send(employeeData);
-})
+});
 
-
+app.delete('/api/dashboard/session-data', async (req, res) => {
+   req.session.employeeData = null;
+   res.status(200).send({data: req.session.employeeData});
+});
 
 //TODO create endpoint for getting "username" and "password" for login process
 /*app.get('/api/get-loginData', async (req, res) => {

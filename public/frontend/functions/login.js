@@ -44,10 +44,27 @@ async function handleLogin(usertype) {
     const form = document.getElementById("login");
     // Überprüfe, ob das Formular die HTML-Validierungsanforderungen erfüllt
     if (form.checkValidity()) {
-        if (usertype === "arzt" || usertype === "arzthelfer" || usertype === "verwaltung") {
+        if (usertype === "arzt") {
             let employeeID = document.getElementById("employeenr").value;
-            employeeData = await get.employee(employeeID);
-            window.location.href = '/testing'; //TODO change to dashboard
+            employeeData = await get.doctor(employeeID);
+            if (employeeData !== undefined) {
+                window.location.href = '/dashboard';
+            } else {
+                window.alert("Fehler: die angegebenen Daten sind nicht gültig");
+            }
+        } else if (usertype === "arzthelfer" || usertype === "verwaltung") {
+            let employeeID = document.getElementById("employeenr").value;
+            try {
+                employeeData = await get.employee(employeeID);
+                if (employeeData !== undefined) {
+                    window.location.href = '/dashboard';
+                } else {
+                    window.alert("Fehler: die angegebenen Daten sind nicht gültig");
+                }
+            } catch (error) {
+                console.log("fehler ist aufgetreten: " + error);
+            }
+            
         }
         // Hier kannst du das machen, was du möchtest, z.B. Daten verarbeiten oder an eine API senden
         //TODO add check for "username" and "password"

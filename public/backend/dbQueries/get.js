@@ -30,11 +30,27 @@ export async function articles(db, req, res) {
     }
 }
 
-// Funktion zum Abrufen eines bestimmten Mitarbeiters
+export async function doctor(db, req, res) {
+    const employeeId = req.params.id;
+    try {
+        const result = await db.query(`SELECT * FROM arzt WHERE arztNr = ${employeeId}`);
+        if (result) {
+            req.session.employeeData = result[0][0];
+
+            res.status(200).send(result[0][0]);
+        } else {
+            res.status(404).send({ error: "Arzt nicht gefunden" });
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen des Arztes:", error);
+        res.status(500).send({ error: "Fehler beim Abrufen des Arztes" });
+    }
+}
+
 export async function employee(db, req, res) {
     const employeeId = req.params.id;
     try {
-        const result = await db.query(`SELECT * FROM employees WHERE EmployeeID = ${employeeId}`);
+        const result = await db.query(`SELECT * FROM mitarbeiter WHERE personalNr = ${employeeId}`);
         if (result) {
             req.session.employeeData = result[0][0];
 
