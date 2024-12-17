@@ -63,3 +63,18 @@ export async function employee(db, req, res) {
         res.status(500).send({ error: "Fehler beim Abrufen des Mitarbeiters" });
     }
 }
+
+export async function patients(db, req, res) {
+    try {
+        const result = await db.query(`SELECT * FROM patient`);
+        if (result) {
+            console.log(result[0]);
+            res.status(200).send(result[0]);
+        } else {
+            res.status(404).send({ error: "Patienten nicht gefunden" });
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Patienten:", error);
+        res.status(500).send({ error: "Fehler beim Abrufen der Patienten" });
+    }
+}

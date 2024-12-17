@@ -1,5 +1,6 @@
 ﻿import * as Get from "../api/get.js";
 import * as Delete from "../api/delete.js";
+import { CreateContent } from "./1_verwaltung/CreateContent.js"
 import { navigate } from "./navigateFunction.js";
 
 let showAllCustomers = document.getElementById("showAllCustomers");
@@ -7,8 +8,14 @@ let customerList = document.getElementById("customerList");
 let showAllArticles = document.getElementById("showAllArticles");
 let articleList = document.getElementById("articleList");
 let logoutButton = document.getElementById("logout");
+let card = document.getElementById("testCard");
+//content
+let content = document.getElementById("content");
 
 // Funktion, die bei Klick auf den Button die API aufruft
+
+
+
 showAllCustomers.addEventListener('click', async function() {
     await Get.allCustomers(customerList);
 });
@@ -25,8 +32,12 @@ logoutButton.addEventListener("click", async function() {
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("try to get session data from server");
     try {
-        const promise = await fetch('/api/dashboard/session-data')
-            .then(response => {
+        const promise = await fetch(`/api/dashboard/session-data`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then(response => {
                 if (response.ok) {
                     return response.json(); // Rückgabe eines neuen Promises mit JSON-Daten
                 } else {
@@ -43,6 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     
                     if(employee.abteilungsID !== null) {
                         switch (employee.abteilungsID) {
+                            //undefined = Arzt
                             case undefined:
                                 console.log(employee); // Hier sind die fertigen Daten
                                 document.getElementById('caption').innerHTML = `Willkommen zurück, ${gender} Dr. ${employee.name}`;
@@ -51,6 +63,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                             case 1:
                                 console.log(employee); // Hier sind die fertigen Daten
                                 document.getElementById('caption').innerHTML = `Willkommen zurück, ${gender} ${employee.name}`;
+                                CreateContent(content);
                                 break;
                             //ID 2 = IT
                             case 2:

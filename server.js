@@ -58,13 +58,15 @@ app.get('/api/employee/:id', async (req, res) => {
     await get.employee(db, req, res);
 });
 
-
-
+app.get('/api/patients', async (req, res) => {
+    await get.patients(db, req, res);
+})
 app.get('/api/dashboard/session-data', async (req, res) => {
     const employeeData = req.session.employeeData;
     console.log(employeeData);
     res.status(200).send(employeeData);
 });
+
 
 app.delete('/api/dashboard/session-data', async (req, res) => {
    req.session.employeeData = null;

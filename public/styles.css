@@ -3,6 +3,28 @@
     text-align: center;
     margin: auto;
 }
+hr {
+    margin: 10px 25%;
+}
+ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0 20px;
+}
+#dashboard.content {
+    display: flex;
+}
+.card {
+    width: 150px;
+    height: 50px;
+    border: solid black 1px;
+    border-radius: 20px;
+    background-color: darkgray;
+    font-weight: bold;
+    margin: auto;
+    padding: 0 20px
+}
 .allDataList {
     list-style-type: none;
     display: flex;
@@ -17,6 +39,10 @@
     padding: 5px 10px;
     outline: solid black 1px;
 }
+.breakDiv {
+    display: inline-block;
+    margin: 0 10px;
+}
 #header {
     padding: 10px;
 }
@@ -25,4 +51,18 @@
     height: 50px;
     border: solid black 1px;
     border-radius: 10px;
+}
+#selectionContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 10px 50px;
+}
+
+#selectionContainer>div {
+    display: flex;
+    flex-direction: column;
+}
+#selectionContainer>div>label {
+    margin-bottom: 5px;
 }
