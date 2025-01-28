@@ -1,6 +1,6 @@
 ﻿import show_allArticles from "../functions/show_allArticles.js";
 import show_allCustomers from "../functions/show_allCustomers.js";
-import {showAllPatients} from "../functions/_general/showAllPatients.js";
+import { showAllPatients } from "../functions/_general/showAllPatients.js";
 
 export async function allArticles(listElement) {
     try {

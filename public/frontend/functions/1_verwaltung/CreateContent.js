@@ -4,7 +4,7 @@ import { showAllPatientsError } from "../_general/showAllPatients.js";
 import { getSearchPatientsBy } from "../searchPatientsBy.js";
 import { invoicesSearch } from "./invoicesSearch.js";
 import { clearSelection } from "../clearSelection.js";
-import {createPatient} from "./createPatient.js";
+import { createPatient } from "./createPatient.js";
     
 export function CreateContent(content) {
     const cardContainer = document.createElement('div');
@@ -81,6 +81,7 @@ export function CreateContent(content) {
     patientsOptionsContainer.appendChild(patientsOption2Text);
 
     //Funktionalitäten
+    //Rechnungen anzeigen
     patientsInvoice.addEventListener('click', () => {
         patientsSelection.forEach(radio =>{
             if (radio.checked) {
@@ -91,6 +92,7 @@ export function CreateContent(content) {
         invoicesSearch(additionalContainer)
     })
     
+    //Patient anlegen
     patientsCreate.addEventListener('click', () => {
         clearSelection(additionalContainer);
         createPatient(additionalContainer)
@@ -104,6 +106,7 @@ export function CreateContent(content) {
         });
     });
     
+    //Patienten anzeigen
     patientsCard.addEventListener("click", async e => {
         e.preventDefault();
         while (resultPatientDataList.firstChild) {
@@ -130,8 +133,7 @@ export function CreateContent(content) {
                 
             }
         }
-        
-        
     });
+    
 
 }

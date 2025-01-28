@@ -1,4 +1,6 @@
-﻿export function createPatient(htmlElement) {
+﻿import * as Post from "../../api/post.js";
+
+export function createPatient(htmlElement) {
     const cardSeparator1 = document.createElement('hr');
     const cardSeparator2 = document.createElement('hr');
     const searchButton = document.createElement('div');
@@ -51,7 +53,7 @@
     patientCityInput.id = "patientCity";
     
     //Anlegen Button
-    searchButton.id = 'creatPatientButton';
+    searchButton.id = 'createPatientButton';
     searchButton.classList.add('searchButton');
     searchButton.textContent = "Anlegen";
     searchButton.setAttribute("display", "hidden");
@@ -85,4 +87,15 @@
 
 
     htmlElement.appendChild(cardSeparator2);
+    searchButton.addEventListener('click', () => {
+        let patientData = {
+            patientID: patientNumberInput.value,
+            surname: patientSurnameInput.value,
+            name: patientNameInput.value,
+            street: patientStreetInput.value,
+            postalcode: patientPostalCodeInput.value,
+            city: patientCityInput.value
+        }
+        return Post.createPatient(patientData);
+    });
 }
