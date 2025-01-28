@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import Database from './public/backend/database.js';
-import * as get from './public/backend/dbQueries/get.js';
+import * as Get from './public/backend/dbQueries/get.js';
 
 const app = express();
 const port = 3000;
@@ -43,24 +43,35 @@ app.get('/dashboard', async (req, res) => {
 })
 
 app.get('/api/customer', async (req, res) => {
-    await get.customer(db, req, res);
+    await Get.customer(db, req, res);
 });
 
 app.get('/api/get-articles', async (req, res) => {
-    await get.articles(db, req, res);
+    await Get.articles(db, req, res);
 })
 
 app.get('/api/doctor/:id', async (req, res) => {
-    await get.doctor(db, req, res);
+    await Get.doctor(db, req, res);
 });
 
 app.get('/api/employee/:id', async (req, res) => {
-    await get.employee(db, req, res);
+    await Get.employee(db, req, res);
 });
 
 app.get('/api/patients', async (req, res) => {
-    await get.patients(db, req, res);
-})
+    await Get.patients(db, req, res);
+});
+
+app.get('/api/patients/id/:value', async (req, res) => {
+    await Get.patientsBy(db, req, res, "id");
+});
+app.get('/api/patients/name/:value', async (req, res) => {
+    await Get.patientsBy(db, req, res, "name");
+});
+app.get('/api/patients/surname/:value', async (req, res) => {
+    await Get.patientsBy(db, req, res, "surname");
+});
+
 app.get('/api/dashboard/session-data', async (req, res) => {
     const employeeData = req.session.employeeData;
     console.log(employeeData);

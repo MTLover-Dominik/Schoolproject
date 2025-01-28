@@ -78,3 +78,29 @@ export async function patients(db, req, res) {
         res.status(500).send({ error: "Fehler beim Abrufen der Patienten" });
     }
 }
+
+export async function patientsBy(db, req, res, searchTerm) {
+    try {
+        let term;
+        if (searchTerm === "id") { term = "patientNr"; }
+        if (searchTerm === "name") { term = "vorname"; }
+        if (searchTerm === "surname") { term = "name"; }
+        const value = req.params.value;
+        console.log(`Select * From patient Where ${term} = "${value}"`);
+        let result;
+        if (searchTerm === "id") {
+             result = await db.query(`SELECT * FROM patient Where ${term} = ${value}`);
+        } else {
+            result = await db.query(`SELECT * FROM patient Where ${term} = "${value}"`);
+        }
+        if (result) {
+            console.log(result[0]);
+            res.status(200).send(result[0]);
+        } else {
+            res.status(404).send({ error: "Patienten nicht gefunden" });
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Patienten:", error);
+        res.status(500).send({ error: "Fehler beim Abrufen der Patienten" });
+    }
+}

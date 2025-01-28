@@ -2,7 +2,7 @@
     let i = 0;
     do {
         const listItem = document.createElement('li');
-        listItem.innerHTML = `<div class="allDataItem"><b>Kunde ${patients[i].patientNr}</b><br>
+        listItem.innerHTML = `<div class="allDataItem"><b>Patient: ${patients[i].patientNr}</b><br>
             ${patients[i].vorname} ${patients[i].name}<br>
             ${patients[i].strasse}<br>
             ${patients[i].plz} ${patients[i].ort}</div>`;

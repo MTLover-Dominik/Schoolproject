@@ -1,4 +1,5 @@
-﻿
+﻿import { SearchPatientsBy } from "../searchPatientsBy.js";
+
 
 export function searchForPatients (e, htmlContainer) {
     if (e.target.id === "allPatients") {
@@ -9,6 +10,9 @@ export function searchForPatients (e, htmlContainer) {
         }
         return e.target.id;
     } else {
+        while (htmlContainer.firstChild) {
+            htmlContainer.removeChild(htmlContainer.firstChild);
+        }
         const cardSeparator1 = document.createElement('hr');
         const cardSeparator2 = document.createElement('hr');
         const selectOptions = document.createElement('div');
@@ -73,6 +77,7 @@ export function searchForPatients (e, htmlContainer) {
         radioName.appendChild(radioPatientName);
         radioName.appendChild(labelPatientName);
         
+        
         selectOptions.appendChild(divBreak2);
         selectOptions.appendChild(divSurname);
         divSurname.appendChild(radioSurname);
@@ -85,22 +90,28 @@ export function searchForPatients (e, htmlContainer) {
                 const idField = document.getElementById('patientID');
                 const nameField = document.getElementById('patientName');
                 const surnameField = document.getElementById('patientSurname');
-                console.log("Value: " + e.target.value); //TODO value richtig dom manipulation nicht
                 if (e.target.value === "id") {
                     if (!idField) divId.appendChild(inputPatientId);
-                    if (nameField) divId.removeChild(inputPatientName);
-                    if (surnameField) divId.removeChild(inputPatientSurname);
+                    if (nameField) divName.removeChild(inputPatientName);
+                    if (surnameField) divSurname.removeChild(inputPatientSurname);
+                    SearchPatientsBy(e.target.value);
                 } else if (e.target.value === "name") {
                     if (idField) divId.removeChild(inputPatientId);
-                    if (!nameField) divId.appendChild(inputPatientName);
-                    if (surnameField) divId.removeChild(inputPatientSurname);
+                    if (!nameField) divName.appendChild(inputPatientName);
+                    if (surnameField) divSurname.removeChild(inputPatientSurname);
+                    SearchPatientsBy(e.target.value);
                 } else if (e.target.value === "surname") {
                     if (idField) divId.removeChild(inputPatientId);
-                    if (nameField) divId.removeChild(inputPatientName);
-                    if (!surnameField) divId.appendChild(inputPatientSurname);
+                    if (nameField) divName.removeChild(inputPatientName);
+                    if (!surnameField) divSurname.appendChild(inputPatientSurname);
+                    SearchPatientsBy(e.target.value);
                 }
             });
         });
+        
+        inputPatientId.addEventListener("change", () => {
+            console.log("value: " + inputPatientId.value);
+        })
         
         htmlContainer.appendChild(cardSeparator2);
         return e.target.id;

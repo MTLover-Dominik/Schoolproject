@@ -4,11 +4,9 @@ import {showAllPatients} from "../functions/_general/showAllPatients.js";
 
 export async function allArticles(listElement) {
     try {
-        // Sende eine GET-Anfrage an die API
         const response = await fetch('/api/get-articles');
-
-        if (response.ok) { // response.ok prüft, ob der Statuscode zwischen 200 und 299 liegt
-            const articles = await response.json(); // oder .json() falls die API JSON sendet
+        if (response.ok) {
+            const articles = await response.json();
             show_allArticles(articles, listElement);
         } else {
             const status = await response.status;
@@ -23,11 +21,10 @@ export async function allArticles(listElement) {
 
 export async function allCustomers(listElement) {
     try {
-        // Sende eine GET-Anfrage an die API
         const response = await fetch('/api/customer');
 
-        if (response.ok) { // response.ok prüft, ob der Statuscode zwischen 200 und 299 liegt
-            const customers = await response.json(); // oder .json() falls die API JSON sendet
+        if (response.ok) {
+            const customers = await response.json();
             show_allCustomers(customers, listElement);
         } else {
             const status = response.status;
@@ -68,10 +65,9 @@ export async function employee(employeeID) {
 
 export async function allPatients(listElement) {
     try {
-        // Sende eine GET-Anfrage an die API
         const response = await fetch('/api/patients');
-        if (response.ok) { // response.ok prüft, ob der Statuscode zwischen 200 und 299 liegt
-            const patients = await response.json(); // oder .json() falls die API JSON sendet
+        if (response.ok) { 
+            const patients = await response.json(); 
             showAllPatients(patients, listElement);
         } else {
             const status = response.status;
@@ -80,6 +76,24 @@ export async function allPatients(listElement) {
         }
     } catch (error) {
         console.error('Fehler:', error);
+        document.getElementById('result').textContent = 'Fehler bei der Verbindung zur API.';
+    }
+}
+
+export async function patientBy(term, value, listElement) {
+    try {
+        const response = await fetch(`/api/patients/${term}/${value}`);
+        console.log(response);
+        if (response.ok) {
+            const patients = await response.json();
+            showAllPatients(patients, listElement);
+        } else {
+            const status = response.status;
+            const text = response.statusText;
+            listElement.innerHTML = status + " " + text;
+        }
+    } catch (error) {
+        console.error('Fehler:' + error);
         document.getElementById('result').textContent = 'Fehler bei der Verbindung zur API.';
     }
 }

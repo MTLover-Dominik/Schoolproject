@@ -15,15 +15,55 @@ ul {
 #dashboard.content {
     display: flex;
 }
+.cardContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+.cardAreaWithoutOptions {
+    display: flex;
+}
+.cardContainerItem {
+    flex: 1 1;
+}
 .card {
-    width: 150px;
+    width: 200px;
     height: 50px;
     border: solid black 1px;
     border-radius: 20px;
     background-color: darkgray;
+    font-family: Arial, sans-serif;
+    font-size: 1em;
     font-weight: bold;
     margin: auto;
     padding: 0 20px
+}
+.cardWithoutSelection {
+    margin: auto auto 0;
+}
+.card:hover {
+    cursor: pointer;
+}
+.searchButton {
+    width: 120px;
+    height: 20px;
+    border: solid black 1px;
+    border-radius: 20px;
+    background-color: darkgray;
+    font-family: Arial, sans-serif;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: auto;
+    padding: 0 20px
+}
+.searchButton:hover {
+    cursor: pointer;
+}
+.patientDataItem>label:nth-of-type(even) {
+    margin-left: 20px;
 }
 .allDataList {
     list-style-type: none;
