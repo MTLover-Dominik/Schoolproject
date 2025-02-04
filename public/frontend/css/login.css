@@ -21,9 +21,6 @@
 #login>div>input[type=text], #login>div>input[type=password] {
     width: 230px;
 }
-#login>.buttons {
-    display: none;
-}
 #patientLogin>div>label {
     display: inline-block;
     width: 85px;

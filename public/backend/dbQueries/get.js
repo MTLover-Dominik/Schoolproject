@@ -79,6 +79,25 @@ export async function patients(db, req, res) {
     }
 }
 
+export async function medicalInvoices(db, req, res, data) {
+    try {
+        const result = await db.query(`Select l.datum, l.patientNr, p.vorname, p.name As nachname, l.mdNummer, m.bezeichnung, m.preis, l.arztNr, a.name 
+            From patient_mdLeistung As l
+            Inner Join patient As p On p.patientNr = l.patientNr
+            Inner Join arzt As a On a.arztNr = l.arztNr
+            Inner Join mdLeistung As m On m.nummer = l.mdNummer Where l.patientNr = ${data}`);
+        if (result) {
+            console.log(result[0]);
+            res.status(200).send(result[0]);
+        } else {
+            res.status(404).send({ error: "Patienten nicht gefunden" });
+        }
+    } catch (error) {
+        console.error("Fehler beim Abrufen der Patienten:", error);
+        res.status(500).send({ error: "Fehler beim Abrufen der Patienten" });
+    }
+}
+
 export async function patientsBy(db, req, res, searchTerm) {
     try {
         let term;

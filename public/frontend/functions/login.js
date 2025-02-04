@@ -33,11 +33,7 @@ usertype.addEventListener('change', event => {
 
 loginButton.addEventListener('click', (e) => {
     e.preventDefault();
-    handleLogin(currentUserType);
-});
-
-registerButton.addEventListener('click', (e) => {
-    handleRegister(e);
+    return handleLogin(currentUserType);
 });
 
 async function handleLogin(usertype) {
@@ -75,10 +71,5 @@ async function handleLogin(usertype) {
         // Wenn das Formular nicht valide ist, wird die Standard-HTML-Validierung ausgeführt
         form.reportValidity(); // Zeigt die Standard-Hinweise an
     }
-    
-}
-
-function handleRegister(event) {
-    event.preventDefault();
     
 }

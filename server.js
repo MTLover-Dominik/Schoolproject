@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import Database from './public/backend/database.js';
 import * as Post from './public/backend/dbQueries/post.js';
 import * as Get from './public/backend/dbQueries/get.js';
+import {medicalInvoices} from "./public/backend/dbQueries/get.js";
 
 const app = express();
 const port = 3000;
@@ -50,10 +51,8 @@ app.get('/dashboard', async (req, res) => {
 //API calls
 app.post('/api/patients/:id', (req, res) => {
     const patientData = req.body;
-    console.log("Patient should be created");
-    console.log(patientData);
     return Post.patient(db, req, res, patientData);
-})
+});
 
 app.get('/api/customer', async (req, res) => {
     await Get.customer(db, req, res);
@@ -75,12 +74,26 @@ app.get('/api/patients', async (req, res) => {
     await Get.patients(db, req, res);
 });
 
+app.get('/api/patients/:id/:type', async (req, res) => {
+    const patientID = req.params.id;
+    const serviceType = req.params.type;
+
+    console.log("patientID: " + patientID + "\nservice type: " + serviceType);
+    
+    if (serviceType === "medical") {
+        await Get.medicalInvoices(db, req, res, patientID)
+    }
+    //return Post.patient(db, req, res, patientData);
+});
+
 app.get('/api/patients/id/:value', async (req, res) => {
     await Get.patientsBy(db, req, res, "id");
 });
+
 app.get('/api/patients/name/:value', async (req, res) => {
     await Get.patientsBy(db, req, res, "name");
 });
+
 app.get('/api/patients/surname/:value', async (req, res) => {
     await Get.patientsBy(db, req, res, "surname");
 });

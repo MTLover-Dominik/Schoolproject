@@ -1,7 +1,8 @@
 ﻿import * as Select from "./selectsPatientSearch.js";
+import * as Get from "../../api/get.js";
 
 export function invoicesSearch (htmlElement) {
-    
+    let isMedical = false;
     const cardSeparator1 = document.createElement('hr');
     const cardSeparator2 = document.createElement('hr');
     const selectOptions = document.createElement('div');
@@ -60,12 +61,14 @@ export function invoicesSearch (htmlElement) {
                 while (inputFields.firstChild) {
                     inputFields.removeChild(inputFields.firstChild);
                 }
+                isMedical = true;
                 inputFields.appendChild(labelInputPatientId);
                 inputFields.appendChild(inputPatientId);
             } else if (e.target.id === "extra") {
                 while (inputFields.firstChild) {
                     inputFields.removeChild(inputFields.firstChild);
                 }
+                isMedical = false;
                 inputFields.appendChild(labelInputPatientId);
                 inputFields.appendChild(inputPatientId);
             } else {
@@ -74,6 +77,27 @@ export function invoicesSearch (htmlElement) {
             searchBreak.style.display = "block";
             searchButton.style.display = "block";
         });
+    });
+
+    searchButton.addEventListener('click', () => {
+        let serviceData = {};
+        if (inputPatientId.value === "") {
+            return console.error("You need to insert an Patient-ID");
+        }
+        if (isMedical) {
+            serviceData = {
+                patientID: inputPatientId.value,
+                type: "medical"
+            }
+        }
+        if (!isMedical) {
+            serviceData = {
+                patientID: inputPatientId.value,
+                type: "extra"
+            }
+        }
+        console.log("Data sent:\n" + JSON.stringify(serviceData, null, 2));
+        return Get.searchService(serviceData, document.getElementById('patientsList'));
     });
     
     //todo patientnr, leistungsnummer mdleistung | patientnr, leistung zusatzleistung

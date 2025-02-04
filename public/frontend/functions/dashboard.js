@@ -3,26 +3,10 @@ import * as Delete from "../api/delete.js";
 import { CreateContent } from "./1_verwaltung/CreateContent.js"
 import { navigate } from "./navigateFunction.js";
 
-let showAllCustomers = document.getElementById("showAllCustomers");
-let customerList = document.getElementById("customerList");
-let showAllArticles = document.getElementById("showAllArticles");
-let articleList = document.getElementById("articleList");
 let logoutButton = document.getElementById("logout");
-let card = document.getElementById("testCard");
-//content
 let content = document.getElementById("content");
 
 // Funktion, die bei Klick auf den Button die API aufruft
-
-
-
-showAllCustomers.addEventListener('click', async function() {
-    await Get.allCustomers(customerList);
-});
-
-showAllArticles.addEventListener('click', async function() {
-   await Get.allArticles(articleList);
-});
 
 logoutButton.addEventListener("click", async function() {
     await Delete.sessionData();

@@ -16,3 +16,19 @@ export function showAllPatientsError(htmlList) {
     listItem.innerHTML = `<div class="allDataItem"><b>Fehler</b><br/>Ein Fehler ist aufgetreten</div>`;
     htmlList.appendChild(listItem);
 }
+
+export function showAllPatientInvoices(result, htmlList) {
+    let i = 0;
+    do {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<div class="allDataItem"><b>Rechnung vom: ${result[i].datum}</b><br>
+            <b>Patient ${result[i].patientNr}</b><br>
+            ${result[i].vorname} ${result[i].nachname}<br>
+            <b>Leistung: ${result[i].mdNummer}</b><br>
+            ${result[i].bezeichnung} - ${result[i].preis}€<br>
+            <b>Arzt ${result[i].arztNr}</b><br>
+            ${result[i].name}</div>`;
+        htmlList.appendChild(listItem);
+        i++;
+    } while (result.length > i);
+}

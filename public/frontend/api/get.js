@@ -1,41 +1,5 @@
-﻿import show_allArticles from "../functions/show_allArticles.js";
-import show_allCustomers from "../functions/show_allCustomers.js";
-import { showAllPatients } from "../functions/_general/showAllPatients.js";
+﻿import {showAllPatientInvoices, showAllPatients} from "../functions/_general/showAllPatients.js";
 
-export async function allArticles(listElement) {
-    try {
-        const response = await fetch('/api/get-articles');
-        if (response.ok) {
-            const articles = await response.json();
-            show_allArticles(articles, listElement);
-        } else {
-            const status = await response.status;
-            const text = await response.statusText;
-            listElement.innerHTML = status + " " + text;
-        }
-    } catch (error) {
-        console.error('Fehler:', error);
-        document.getElementById('result').textContent = 'Fehler bei der Verbindung zur API.';
-    }
-}
-
-export async function allCustomers(listElement) {
-    try {
-        const response = await fetch('/api/customer');
-
-        if (response.ok) {
-            const customers = await response.json();
-            show_allCustomers(customers, listElement);
-        } else {
-            const status = response.status;
-            const text = response.statusText;
-            listElement.innerHTML = status + " " + text;
-        }
-    } catch (error) {
-        console.error('Fehler:', error);
-        document.getElementById('result').textContent = 'Fehler bei der Verbindung zur API.';
-    }
-}
 
 export async function doctor(employeeID) {
     try {
@@ -95,5 +59,21 @@ export async function patientBy(term, value, listElement) {
     } catch (error) {
         console.error('Fehler:' + error);
         document.getElementById('result').textContent = 'Fehler bei der Verbindung zur API.';
+    }
+}
+
+export async function searchService(serviceData, listElement) {
+    try {
+        const response = await fetch(`/api/patients/${serviceData.patientID}/${serviceData.type}`);
+        if (response.ok) {
+            const invoices = await response.json();
+            showAllPatientInvoices(invoices, listElement);
+            return console.log(JSON.stringify(invoices, null, 2));
+        }
+        const status = response.status;
+        const text = response.statusText;
+        console.log(status + " " + text);
+    } catch (error) {
+        console.error('Fehler:' + error);
     }
 }
