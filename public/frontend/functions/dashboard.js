@@ -1,5 +1,4 @@
-﻿import * as Get from "../api/get.js";
-import * as Delete from "../api/delete.js";
+﻿import * as Delete from "../api/delete.js";
 import { CreateContent } from "./1_verwaltung/CreateContent.js"
 import { navigate } from "./navigateFunction.js";
 

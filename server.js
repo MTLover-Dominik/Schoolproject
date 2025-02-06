@@ -74,7 +74,7 @@ app.get('/api/patients', async (req, res) => {
     await Get.patients(db, req, res);
 });
 
-app.get('/api/patients/:id/:type', async (req, res) => {
+app.get('/api/patients/invoices/:id/:type', async (req, res) => {
     const patientID = req.params.id;
     const serviceType = req.params.type;
 

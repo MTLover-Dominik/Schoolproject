@@ -64,7 +64,7 @@ export async function patientBy(term, value, listElement) {
 
 export async function searchService(serviceData, listElement) {
     try {
-        const response = await fetch(`/api/patients/${serviceData.patientID}/${serviceData.type}`);
+        const response = await fetch(`/api/patients/invoices/${serviceData.patientID}/${serviceData.type}`);
         if (response.ok) {
             const invoices = await response.json();
             showAllPatientInvoices(invoices, listElement);

@@ -25,9 +25,8 @@ export function showAllPatientInvoices(result, htmlList) {
             <b>Patient ${result[i].patientNr}</b><br>
             ${result[i].vorname} ${result[i].nachname}<br>
             <b>Leistung: ${result[i].mdNummer}</b><br>
-            ${result[i].bezeichnung} - ${result[i].preis}€<br>
-            <b>Arzt ${result[i].arztNr}</b><br>
-            ${result[i].name}</div>`;
+            ${result[i].bezeichnung}, Kosten: ${result[i].preis}€<br>
+            <b>Arzt</b> ${result[i].name}</div>`;
         htmlList.appendChild(listItem);
         i++;
     } while (result.length > i);

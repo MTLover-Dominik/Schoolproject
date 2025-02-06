@@ -99,6 +99,7 @@ export async function medicalInvoices(db, req, res, data) {
 }
 
 export async function patientsBy(db, req, res, searchTerm) {
+    console.log("Specific patient was searched")
     try {
         let term;
         if (searchTerm === "id") { term = "patientNr"; }

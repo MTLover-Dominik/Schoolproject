@@ -80,6 +80,10 @@ export function invoicesSearch (htmlElement) {
     });
 
     searchButton.addEventListener('click', () => {
+        const resultDataList = document.getElementById('patientsList');
+        while (resultDataList.firstChild) {
+            resultDataList.removeChild(resultDataList.firstChild); // Entfernt das erste Kind so lange, bis keine mehr übrig sind
+        }
         let serviceData = {};
         if (inputPatientId.value === "") {
             return console.error("You need to insert an Patient-ID");
@@ -99,8 +103,6 @@ export function invoicesSearch (htmlElement) {
         console.log("Data sent:\n" + JSON.stringify(serviceData, null, 2));
         return Get.searchService(serviceData, document.getElementById('patientsList'));
     });
-    
-    //todo patientnr, leistungsnummer mdleistung | patientnr, leistung zusatzleistung
     
     htmlElement.appendChild(cardSeparator2);
 }
