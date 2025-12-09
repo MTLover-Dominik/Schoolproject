@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const credentials = JSON.parse(fs.readFileSync('H:/ITP/lilHecht/_gui/credentials.json', 'utf8'));
+const credentials = JSON.parse(fs.readFileSync('T:/data-source/data.json', 'utf8')); //Data is saved on local drive, must be adjusted to correct data source
 const db = new Database(credentials);
 await db.connect();
 
