@@ -5,8 +5,6 @@ import { navigate } from "./navigateFunction.js";
 let logoutButton = document.getElementById("logout");
 let content = document.getElementById("content");
 
-// Funktion, die bei Klick auf den Button die API aufruft
-
 logoutButton.addEventListener("click", async function() {
     await Delete.sessionData();
     navigate('/');
@@ -22,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             },
         }).then(response => {
                 if (response.ok) {
-                    return response.json(); // Rückgabe eines neuen Promises mit JSON-Daten
+                    return response.json();
                 } else {
                     throw new Error('Fehler beim Abrufen der Daten');
                 }
