@@ -82,7 +82,7 @@ export function invoicesSearch (htmlElement) {
     searchButton.addEventListener('click', () => {
         const resultDataList = document.getElementById('patientsList');
         while (resultDataList.firstChild) {
-            resultDataList.removeChild(resultDataList.firstChild); // Entfernt das erste Kind so lange, bis keine mehr übrig sind
+            resultDataList.removeChild(resultDataList.firstChild);
         }
         let serviceData = {};
         if (inputPatientId.value === "") {

@@ -6,7 +6,6 @@ import { fileURLToPath } from 'url';
 import Database from './public/backend/database.js';
 import * as Post from './public/backend/dbQueries/post.js';
 import * as Get from './public/backend/dbQueries/get.js';
-import {medicalInvoices} from "./public/backend/dbQueries/get.js";
 
 const app = express();
 const port = 3000;
@@ -16,18 +15,14 @@ app.use(express.json());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Statischer Ordner für Dateien
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Lade die Anmeldeinformationen aus der JSON-Datei TODO credentials anpassen
 const credentials = JSON.parse(fs.readFileSync('H:/ITP/lilHecht/_gui/credentials.json', 'utf8'));
-
-// Erstelle eine Instanz der Datenbankklasse
 const db = new Database(credentials);
 await db.connect();
 
 app.use(session({
-    secret: 'mySecret',  // Geheime Schlüssel für die Session
+    secret: 'mySecret',
     resave: false,
     saveUninitialized: true,
 }));
@@ -38,14 +33,12 @@ app.get('/', (req, res) => {
 });
 
 //html routes
-
-
 app.get('/dashboard' , (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'frontend', 'views', 'dashboard.html'));
 });
 
 app.get('/dashboard', async (req, res) => {
-    //res.sendFile(path.join(__dirname, 'public', 'frontend', 'views', 'dashboard.html'));
+    res.sendFile(path.join(__dirname, 'public', 'frontend', 'views', 'dashboard.html'));
 })
 
 //API calls
@@ -83,7 +76,7 @@ app.get('/api/patients/invoices/:id/:type', async (req, res) => {
     if (serviceType === "medical") {
         await Get.medicalInvoices(db, req, res, patientID)
     }
-    //return Post.patient(db, req, res, patientData);
+    return Post.patient(db, req, res, patientData);
 });
 
 app.get('/api/patients/id/:value', async (req, res) => {

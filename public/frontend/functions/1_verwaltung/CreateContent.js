@@ -63,7 +63,6 @@ export function CreateContent(content) {
     
     //Seitenaufbau
     const patientsOptionsContainer = document.createElement('div');
-
     content.appendChild(cardContainer);
     content.appendChild(additionalContainer);
     content.appendChild(resultPatientDataList);

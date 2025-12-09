@@ -12,7 +12,7 @@ export function navigate(location, delay = 0) {
             timer--;
             console.log(`Verlassen der Seite in: ${timer}`);
             if (count === 3) {
-                clearInterval(intervalId); // Stopp nach 3 Wiederholungen
+                clearInterval(intervalId);
                 window.location.href = location;
             }
         }, delay);

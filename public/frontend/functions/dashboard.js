@@ -39,37 +39,37 @@ document.addEventListener("DOMContentLoaded", async () => {
                         switch (employee.abteilungsID) {
                             //undefined = Arzt
                             case undefined:
-                                console.log(employee); // Hier sind die fertigen Daten
+                                console.log(employee);
                                 document.getElementById('caption').innerHTML = `Willkommen zurück, ${gender} Dr. ${employee.name}`;
                                 break;
                             //ID 1 = Verwaltung
                             case 1:
-                                console.log(employee); // Hier sind die fertigen Daten
+                                console.log(employee);
                                 document.getElementById('caption').innerHTML = `Willkommen zurück, ${gender} ${employee.name}`;
                                 CreateContent(content);
                                 break;
                             //ID 2 = IT
                             case 2:
-                                console.log(employee); // Hier sind die fertigen Daten
+                                console.log(employee);
                                 document.getElementById('caption').innerHTML = `Willkommen zurück, ${gender} ${employee.name}`;
                                 break;
                             //ID 3 = Reinigung
                             case 3:
-                                console.log(employee); // Hier sind die fertigen Daten
+                                console.log(employee);
                                 document.getElementById('caption').innerHTML = `Willkommen zurück, ${gender} ${employee.name}`;
                                 break;
                             //ID 4 = Hausmeister
                             case 4:
-                                console.log(employee); // Hier sind die fertigen Daten
+                                console.log(employee);
                                 document.getElementById('caption').innerHTML = `Willkommen zurück, ${gender} ${employee.name}`;
                                 break;
                             //ID 5 = Arzthelfer
                             case 5:
-                                console.log(employee); // Hier sind die fertigen Daten
+                                console.log(employee);
                                 document.getElementById('caption').innerHTML = `Willkommen zurück, ${gender} ${employee.name}`;
                                 break;
                             default:
-                                console.log(employee); // Hier sind die fertigen Daten
+                                console.log(employee);
                                 document.getElementById('caption').innerHTML = `Willkommen`;
                         }
                     } else {

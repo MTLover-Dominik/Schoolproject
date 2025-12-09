@@ -62,14 +62,13 @@ async function handleLogin(usertype) {
             }
             
         }
-        // Hier kannst du das machen, was du möchtest, z.B. Daten verarbeiten oder an eine API senden
         //TODO add check for "username" and "password"
         //checkCredentials(username, password);
         //TODO create file in "apiFunctions" to process data and check them
         
     } else {
-        // Wenn das Formular nicht valide ist, wird die Standard-HTML-Validierung ausgeführt
-        form.reportValidity(); // Zeigt die Standard-Hinweise an
+        //Standard-HTML-Validierung
+        form.reportValidity();
     }
     
 }

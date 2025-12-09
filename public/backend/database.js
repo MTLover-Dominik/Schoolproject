@@ -3,12 +3,9 @@
 class Database {
     constructor(credentials) {
         this.credentials = credentials;
-
-        // Promise-basierte Verbindung erstellen
         this.connection = null;
     }
 
-    // Verbindung zur Datenbank herstellen
     async connect() {
         try {
             this.connection = await mysql.createConnection({
@@ -25,7 +22,6 @@ class Database {
         }
     }
 
-    // Query-Methode bereitstellen
     async query(sql, params) {
         if (!this.connection) {
             throw new Error("Datenbankverbindung wurde noch nicht hergestellt.");
@@ -33,7 +29,6 @@ class Database {
         return this.connection.execute(sql, params);
     }
 
-    // Verbindung schließen
     async closeConnection() {
         if (this.connection) {
             await this.connection.end();
